@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vua Thoát Hiểm · Motion 3D Liquid Glass</title>
+<style>
+:root{--pg:#ebe8f7;--fg:#241c4a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pg:#0a0916;--fg:#e8e4ff}}
+:root[data-theme="dark"]{--pg:#0a0916;--fg:#e8e4ff}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:100%;background:var(--pg);color:var(--fg);display:grid;place-items:center;overflow:hidden}
+*{box-sizing:border-box}
+.stage{--w:min(100vw,56.25dvh);width:var(--w);height:calc(var(--w)*16/9);container-type:size;position:relative;overflow:hidden;color:#fff;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:linear-gradient(160deg,#1d1458,#4b2397 42%,#b02a7c 78%,#2c2a8a)}
+.bl{position:absolute;border-radius:50%;filter:blur(8cqw);opacity:.75;animation:dr 9s ease-in-out infinite alternate}
+.b1{width:70cqw;height:70cqw;left:-20cqw;top:5cqw;background:#3b82f6}.b2{width:80cqw;height:80cqw;right:-30cqw;top:60cqw;background:#ff3cac;animation-delay:-3s}.b3{width:60cqw;height:60cqw;left:10cqw;bottom:-15cqw;background:#7b2ff7;animation-delay:-6s}
+@keyframes dr{to{transform:translate(8cqw,-10cqw) scale(1.2)}}
+.dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.75) 0 .3cqw,transparent .4cqw),radial-gradient(circle,rgba(46,230,197,.7) 0 .25cqw,transparent .35cqw);background-size:19cqw 23cqw,31cqw 37cqw;background-position:0 0,10cqw 5cqw;animation:rise 14s linear infinite}
+@keyframes rise{to{background-position:0 -46cqw,10cqw -69cqw}}
+.world{position:absolute;inset:0;perspective:150cqw}
+.cam{position:absolute;left:12cqw;top:8cqw;width:76cqw;height:150cqw;transform-style:preserve-3d;will-change:transform;transition:transform 5s cubic-bezier(.45,.05,.2,1);transform:rotateY(-10deg) rotateX(4deg)}
+.cam.nt{transition:none}
+.s1 .cam{animation:dolly 4s ease-out both}
+@keyframes dolly{from{transform:translateZ(-45cqw) rotateY(-26deg) rotateX(8deg)}}
+.s2 .cam{transform:translateZ(8cqw) rotateY(0) rotateX(0)}
+.s3 .cam{transform:rotateY(13deg) rotateX(-4deg)}
+.s4 .cam{transform:translateZ(3cqw) rotateY(-14deg) rotateX(3deg);transition-duration:6s}
+.s5 .cam{transform:translateZ(6cqw) rotateY(9deg) rotateX(-3deg)}
+.s6 .cam{transform:translateZ(-42cqw) translateY(-3cqw) rotateY(-20deg) rotateX(7deg);transition-duration:4s}
+.phone{position:absolute;inset:0;transform-style:preserve-3d;border-radius:9cqw;background:rgba(24,14,60,.6);border:.6cqw solid rgba(255,255,255,.4);box-shadow:0 6cqw 12cqw rgba(0,0,0,.45),inset 0 0 4cqw rgba(255,255,255,.18);animation:fl 5s ease-in-out infinite alternate}
+.phone:before,.phone:after{content:"";position:absolute;inset:0;border-radius:inherit}
+.phone:before{background:rgba(255,255,255,.14);transform:translateZ(-3cqw)}.phone:after{background:rgba(10,5,30,.8);transform:translateZ(-6cqw)}
+@keyframes fl{from{transform:translateY(-1.5cqw) rotateY(-3deg)}to{transform:translateY(1.5cqw) rotateY(3deg)}}
+.screen{position:absolute;inset:2.4cqw;border-radius:7cqw;overflow:hidden;background:linear-gradient(170deg,rgba(60,30,140,.85),rgba(150,40,130,.7) 70%,rgba(40,40,140,.85))}
+.screen:before{content:"";position:absolute;top:2cqw;left:50%;width:18cqw;height:3.4cqw;margin-left:-9cqw;border-radius:2cqw;background:#080414;z-index:4}
+.g{background:linear-gradient(160deg,rgba(255,255,255,.3),rgba(255,255,255,.09) 45%,rgba(255,255,255,.15));border:.3cqw solid rgba(255,255,255,.4);border-radius:4.4cqw;box-shadow:inset 0 .4cqw .5cqw rgba(255,255,255,.55),inset 0 -.6cqw 1.2cqw rgba(120,80,255,.25),0 2.4cqw 5cqw rgba(10,0,40,.35)}
+.screen:after{content:"";position:absolute;inset:-50%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.1) 50%,transparent 58%);animation:shn 6s ease-in-out infinite alternate;pointer-events:none;z-index:6}
+@keyframes shn{from{transform:translateX(-30%)}to{transform:translateX(30%)}}
+.sc.pv{transform:translateX(-10cqw) scale(.96)}
+.sc{position:absolute;inset:0;padding:9cqw 4.5cqw 17cqw;display:flex;flex-direction:column;gap:2.3cqw;opacity:0;transform:translateX(10cqw) scale(.96);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1);will-change:opacity,transform;pointer-events:none;font-size:3.4cqw}
+.sc.on{opacity:1;transform:none}
+.c{justify-content:center;text-align:center}
+@keyframes pop{from{opacity:0;transform:translateY(5cqw) scale(.92)}to{opacity:1;transform:none}}
+.on .a{animation:pop .7s var(--d,0s) both cubic-bezier(.2,.8,.2,1)}
+h1{margin:0;font-size:8.4cqw}h2{margin:0;font-size:7cqw}p{margin:0}
+.sm{font-size:3.1cqw;opacity:.85}.lbl{letter-spacing:.5cqw;font-size:3cqw;opacity:.8}
+.chip{align-self:center;padding:1cqw 3cqw;border-radius:5cqw;background:rgba(255,210,63,.22);border:.3cqw solid #ffd23f;color:#ffd23f;font-weight:700;font-size:3cqw}
+.skull{width:27cqw;height:27cqw;margin:0 auto 2cqw;display:grid;place-items:center;font-size:14cqw;border-radius:8cqw;filter:drop-shadow(0 0 4cqw rgba(170,130,255,.85))}
+.skull span{display:block;animation:spin 4s linear infinite}
+@keyframes spin{to{transform:perspective(60cqw) rotateY(360deg)}}
+.bar{height:2.6cqw;border-radius:2cqw;background:rgba(255,255,255,.2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#2ee6c5,#ffd23f)}
+.on .bar i{animation:fill 3.2s .4s ease-out both}@keyframes fill{to{width:26%}}
+.orb{width:20cqw;height:20cqw;border-radius:50%;margin:0 auto;display:grid;place-items:center;font-size:10cqw}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.typ{display:inline-block;width:0;overflow:hidden;white-space:nowrap;vertical-align:bottom}
+.on .typ{animation:typ var(--t,1s) var(--d,0s) steps(var(--n)) both}
+@keyframes typ{from{width:0}to{width:calc(var(--n)*1ch)}}
+.keybox{padding:3cqw;font-size:4.2cqw;font-weight:700;color:#7dfbe6;letter-spacing:.2cqw}
+.btn{padding:3cqw;border-radius:4cqw;font-weight:800;text-align:center;background:rgba(255,255,255,.2);border:.3cqw solid rgba(255,255,255,.4)}
+.ok{background:linear-gradient(90deg,#14c8a4,#35e08a);border-color:#9fffd9;box-shadow:0 0 4cqw rgba(46,230,197,.6)}
+.on .ok{animation:pop .7s 3.6s both,glow 1s 4.3s infinite alternate}
+@keyframes glow{to{box-shadow:0 0 7cqw rgba(46,230,197,.95);filter:brightness(1.15)}}
+.row{display:flex;align-items:center;gap:3cqw;justify-content:center}
+.inp{padding:2.4cqw 3cqw;text-align:left;font-size:4cqw}.inp small{display:block;font-size:2.6cqw;opacity:.7;margin-bottom:.6cqw}
+.go{background:linear-gradient(90deg,#ff8a3d,#ff3cac)}
+.on .press{animation:pop .7s 1s both,press .5s 2.6s}
+@keyframes press{50%{transform:scale(.92);filter:brightness(.85)}}
+.toast{align-self:center;padding:2cqw 5cqw;border-radius:5cqw;background:#18c98a;font-weight:800}
+.hd{display:flex;justify-content:space-between;align-items:center}.hd small{display:block;opacity:.75;font-size:2.6cqw}.hd b{font-size:4cqw}.r{text-align:right}
+.info{display:flex;justify-content:space-between;padding:2cqw 2.6cqw;font-size:2.7cqw}
+.ring{width:30cqw;height:30cqw;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:conic-gradient(#2ee6c5 var(--ang,360deg),rgba(255,255,255,.2) 0)}
+.ring div{width:80%;height:80%;border-radius:50%;background:#2b1a73;display:grid;place-content:center;text-align:center}.ring b{font-size:10cqw;line-height:1}.ring small{opacity:.7}
+.sug{text-align:center;color:#ffd23f;font-weight:700}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:2cqw}
+.rm{padding:2.4cqw;position:relative;overflow:hidden;min-height:12cqw}.rm b{display:block;font-size:3cqw}.rm span{color:#7dfbe6;font-size:2.8cqw}
+.hot{border-color:#ff8a3d}.crack{position:absolute;right:1cqw;top:0;width:16cqw;height:12cqw}
+.crack path{fill:none;stroke:#fff;stroke-width:2.2;stroke-dasharray:140;stroke-dashoffset:140;opacity:.8}
+.on .crack path{animation:dash 1.2s 1.8s forwards}@keyframes dash{to{stroke-dashoffset:0}}
+.p1,.p2{position:absolute;inset:9cqw 4.5cqw 17cqw;display:flex;flex-direction:column;gap:2.3cqw}
+.on .p1{animation:out .5s var(--o,2.4s) both}.on .p2{animation:pop .6s var(--i,2.6s) both}
+.p2{opacity:0}.on .p2{opacity:1}
+@keyframes out{to{opacity:0;transform:translateY(-4cqw);visibility:hidden}}
+.st{display:grid;grid-template-columns:21cqw 1fr 11cqw;align-items:center;gap:1.6cqw;font-size:2.5cqw;white-space:nowrap}
+.st .bar{height:2.4cqw}.st .bar i{width:0;background:var(--c,#a98bff);box-shadow:0 0 2cqw var(--c,#a98bff)}.on .st .bar i{animation:grow 1s var(--d) both}@keyframes grow{to{width:var(--w)}}
+.st.top .bar i{background:#5dffa0}
+.big{text-align:center;font-size:15cqw;font-weight:900;color:#5dffa0;text-shadow:0 0 5cqw rgba(93,255,160,.9);line-height:1}
+.on .big{animation:big 1.1s 1.2s both}@keyframes big{from{transform:scale(.4);opacity:0}60%{transform:scale(1.2)}to{transform:scale(1);opacity:1}}
+.tc{padding:3cqw}.tc b{font-size:3.6cqw}.tog{width:11cqw;height:6cqw;border-radius:3cqw;background:#2ee6c5;position:relative;margin-left:auto}.tog:after{content:"";position:absolute;right:.7cqw;top:.7cqw;width:4.6cqw;height:4.6cqw;border-radius:50%;background:#fff}
+.modal{position:absolute;left:2cqw;right:2cqw;bottom:2cqw;padding:3.4cqw;background:linear-gradient(135deg,rgba(80,40,170,.9),rgba(160,50,140,.85));z-index:3}
+.on .modal{animation:pop .6s 3.7s both}.bub{margin-top:2cqw;padding:2.4cqw;border-radius:3cqw;background:rgba(255,255,255,.2)}
+.mi{display:flex;justify-content:space-between;align-items:center;padding:3cqw;font-weight:700}
+.tk{font-family:ui-monospace,Menlo,monospace;font-weight:700}.up{color:#5dffa0}.dn{color:#ff6b7a}
+.mini{padding:1.6cqw 3cqw;border-radius:3cqw;background:#ff8a3d;font-size:2.8cqw;font-weight:800}
+.logo{text-align:center;font-size:15cqw}
+.tabs{position:absolute;left:3cqw;right:3cqw;bottom:3.5cqw;display:flex;justify-content:space-around;padding:1.4cqw;font-size:2.2cqw;text-align:center;opacity:0;transition:opacity .6s;z-index:3;border-radius:5cqw}
+.tabs span{padding:1.2cqw 1.4cqw;border-radius:3.4cqw;line-height:1.35;transition:background .4s}.tabs .act{background:rgba(255,255,255,.3);box-shadow:0 0 3cqw rgba(160,130,255,.8)}
+.hasTabs .tabs{opacity:1}
+.sweep{position:absolute;inset:0;z-index:5;pointer-events:none;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.6) 50%,transparent 62%);transform:translateX(-110%)}
+.sweep.go{animation:sw .9s ease-out}@keyframes sw{to{transform:translateX(110%)}}
+.sub{position:absolute;left:6cqw;right:6cqw;bottom:5cqw;z-index:10;text-align:center;font-size:4cqw;font-weight:600;padding:2cqw 3cqw;border-radius:3cqw;background:rgba(10,8,30,.6);backdrop-filter:blur(1.5cqw);opacity:0;transition:opacity .3s}.sub.show{opacity:1}
+.prog{position:absolute;top:0;left:0;height:.8cqw;width:0;background:#ffd23f;z-index:11}
+.endv{position:absolute;inset:0;z-index:8;background:#05030f;opacity:0;pointer-events:none;transition:opacity 1.2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3cqw;text-align:center}
+.endv.on{opacity:1}.endv .logo{filter:drop-shadow(0 0 5cqw #b57bff);animation:fl 3s ease-in-out infinite alternate}
+.endv h3{margin:0;font-size:8cqw;text-shadow:0 0 5cqw rgba(181,123,255,.9)}
+.endv button,.play{pointer-events:auto;font:inherit;font-weight:800;font-size:4cqw;padding:2.6cqw 7cqw;border-radius:6cqw;border:.4cqw solid rgba(255,255,255,.6);background:linear-gradient(90deg,#ff8a3d,#ff3cac);color:#fff;cursor:pointer}
+.endv button{opacity:0;transition:opacity .6s .4s}.endv.fin button{opacity:1}.endv:not(.fin) button{pointer-events:none}
+.cover{position:absolute;inset:0;z-index:12;background:rgba(10,8,30,.55);backdrop-filter:blur(2cqw);display:flex;flex-direction:column;gap:3cqw;align-items:center;justify-content:center;text-align:center;padding:10cqw}
+.cover.off{display:none}.cover p{font-size:3.4cqw;opacity:.85}
+.sh{position:absolute;left:2.5cqw;right:2.5cqw;bottom:17cqw;z-index:2;padding:3cqw;display:flex;flex-direction:column;gap:1.7cqw;background:linear-gradient(160deg,rgba(112,72,205,.97),rgba(72,36,150,.97));opacity:0}
+.on .sh{animation:shin .8s var(--i) both cubic-bezier(.2,.8,.2,1),shout .5s var(--o) forwards}
+@keyframes shin{from{opacity:0;transform:translateY(30cqw)}to{opacity:1;transform:none}}
+@keyframes shout{from{opacity:1;transform:none}to{opacity:0;transform:translateY(12cqw);visibility:hidden}}
+.sh .t{font-size:4.6cqw}.grab{width:10cqw;height:1cqw;border-radius:1cqw;background:rgba(255,255,255,.5);margin:0 auto}
+.pills{display:flex;gap:2cqw}.pill{flex:1;text-align:center;padding:1.8cqw;border-radius:3cqw;background:rgba(255,255,255,.18);border:.3cqw solid rgba(255,255,255,.3);font-weight:700;font-size:3cqw}.pill.hi{background:linear-gradient(90deg,#4f8cff,#a06bff)}
+.on .gd{animation:gdp .4s 3.1s both}@keyframes gdp{to{background:rgba(255,210,63,.35);border-color:#ffd23f;color:#ffd23f}}
+.kp{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2cqw}.kp span{text-align:center;padding:1.2cqw;border-radius:2cqw;background:rgba(255,255,255,.2);font-weight:700;font-size:3.4cqw}
+.qr{background:#fff;border-radius:2cqw;padding:1.6cqw;width:28cqw;height:28cqw;margin:0 auto;box-shadow:0 0 5cqw rgba(255,255,255,.4)}.qr svg{width:100%;height:100%;display:block}
+.kv{display:flex;justify-content:space-between;font-size:2.8cqw;padding:.4cqw 0;border-bottom:.2cqw solid rgba(255,255,255,.15)}
+.obr{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;font-size:2.5cqw;font-family:ui-monospace,Menlo,monospace}.obr span:first-child{color:#5dffa0}.obr span:last-child{color:#ff8fbd}
+.ob{padding:2cqw;display:flex;flex-direction:column;gap:.9cqw;background:rgba(10,5,40,.35);border-radius:3cqw}
+.price{font-size:7cqw;font-weight:800;color:#ffe9a8}
+</style>
+</head>
+<body>
+<div class="stage s1" id="st">
+<div class="bl b1"></div><div class="bl b2"></div><div class="bl b3"></div><div class="dots"></div>
+<div class="world"><div class="cam" id="cam"><div class="phone"><div class="screen">
+
+<section class="sc c"><div class="skull g a" style="--d:.1s"><span>💀</span></div>
+<h1 class="a" style="--d:.5s">Vua Thoát Hiểm</h1><p class="chip a" style="--d:.8s">V5.0 · LIQUID GLASS</p>
+<p class="sm a" style="--d:1.1s">Đang kiểm tra phiên bản...</p><div class="bar a" style="--d:1.2s"><i></i></div><b id="pct" class="a" style="--d:1.3s">0%</b>
+<p class="sm a" style="--d:1.6s">By Kpá Thuyên</p></section>
+
+<section class="sc c"><h2 class="a">Kích hoạt Key</h2><div class="orb g a" style="--d:.3s">🔑</div>
+<p class="lbl a" style="--d:.6s">KEY CỦA BẠN</p>
+<div class="g keybox a" style="--d:.8s"><span class="typ mono" style="--n:19;--d:1.3s;--t:2s">VTH-4JL8-JD5M-K998</span></div>
+<div class="btn ok a">ĐÃ KÍCH HOẠT ✓</div>
+<div class="row a" style="--d:3.9s"><div class="btn">LẤY KEY</div><span class="sm">Dán từ bộ nhớ tạm</span></div></section>
+
+<section class="sc c"><h2 class="a">Đăng nhập</h2>
+<p class="sm a" style="--d:.3s">Nhập user_id và user_secret_key. Đăng nhập xong sẽ lưu lại, không hỏi lại.</p>
+<div class="g inp a" style="--d:.5s"><small>user_id</small><span class="typ mono" style="--n:7;--d:.9s;--t:.9s">6378511</span></div>
+<div class="g inp a" style="--d:.7s"><small>user_secret_key</small><span class="mono">••••••••••••</span></div>
+<div class="btn go press a">ĐĂNG NHẬP</div>
+<div class="toast a" style="--d:3.1s">Thành công</div>
+<p class="sm a" style="--d:3.5s">Đã tách User ID &amp; Secret key từ link</p></section>
+
+<section class="sc"><div class="hd a"><div><b>Thuyên</b><small>ID 6378511</small></div><div class="r"><b>42.632,1</b><small>CONTRIBUTE</small></div><span class="chip" style="align-self:center">HAPPY 32</span></div>
+<div class="g info a" style="--d:.2s"><span>Ván 1195547</span><span>26 người chơi</span><span>Tổng cược 382.533</span></div>
+<div class="ring a" id="ring" style="--d:.4s"><div><b id="cd">60</b><small>giây</small></div></div>
+<p class="sug a" style="--d:.7s">Gợi ý: Phòng 7 · Phòng tài vụ</p>
+<div class="grid">
+<div class="g rm a" style="--d:.9s"><b>Nhà Kho</b><span>43.221</span></div>
+<div class="g rm hot a" style="--d:1.1s"><b>Phòng họp 💀</b><span>68.100</span><svg class="crack" viewBox="0 0 100 60"><path d="M62 0L52 18L66 28L48 44L58 60"/></svg></div>
+<div class="g rm a" style="--d:1.3s"><b>Phòng giám đốc</b></div>
+<div class="g rm a" style="--d:1.5s"><b>Phòng trò chuyện</b></div>
+<div class="g rm a" style="--d:1.7s"><b>Phòng giám sát</b></div>
+<div class="g rm a" style="--d:1.9s"><b>Văn phòng</b></div></div></section>
+
+<section class="sc"><div class="p1" style="--o:2.4s">
+<div class="g tc row a" style="--d:.1s;gap:3cqw;justify-content:flex-start"><span style="font-size:8cqw">💀</span><div><b>Phân Tích Sát Thủ</b><div class="sm">Thống kê phòng bị giết · Vua Thoát Hiểm</div></div></div>
+<div class="st a" style="--d:.3s"><span>Nhà Kho</span><div class="bar"><i style="--w:83%;--d:.4s;--c:#ffb347"></i></div><b>15 (15%)</b></div>
+<div class="st a" style="--d:.4s"><span>Phòng họp</span><div class="bar"><i style="--w:89%;--d:.5s;--c:#ff5fa2"></i></div><b>16 (16%)</b></div>
+<div class="st a" style="--d:.5s"><span>Phòng giám đốc</span><div class="bar"><i style="--w:56%;--d:.6s;--c:#a98bff"></i></div><b>10 (10%)</b></div>
+<div class="st a" style="--d:.6s"><span>Phòng giám sát</span><div class="bar"><i style="--w:78%;--d:.7s;--c:#5dffa0"></i></div><b>14 (14%)</b></div>
+<div class="st a" style="--d:.7s"><span>Phòng tài vụ</span><div class="bar"><i style="--w:44%;--d:.8s;--c:#ffd23f"></i></div><b>8 (8%)</b></div>
+<div class="big">81%</div><p class="sug a" style="--d:1.4s">Điểm an toàn cao nhất</p>
+<p class="sm a" style="text-align:center;--d:1.6s">Phòng tài vụ · 81%</p><div class="btn a" style="--d:1.8s">Làm mới số liệu</div></div>
+<div class="p2" style="--i:2.6s"><h2>Tool</h2>
+<div class="g tc"><b>Phân tích 10 ván</b></div><div class="g tc"><b>Phân tích 100 ván</b></div>
+<div class="btn go">Xem phân tích ngay</div>
+<div class="g tc row"><b>Phân tích VIP Pro</b><i class="tog"></i></div></div>
+<div class="g modal"><b style="font-size:4cqw">AI Trợ Lý VIP</b><div class="sm">Powered by Gemini</div><div class="bub">Chào bạn 👋 Mình là Trợ Lý VIP...</div></div></section>
+
+<section class="sc"><div class="p1" style="--o:12.6s">
+<h2 class="a">Menu</h2>
+<div class="g mi a" style="--d:.3s"><span>Cảnh Code</span><span>›</span></div>
+<div class="g mi a" style="--d:.5s"><span>Mua USDT · ZaloPay · MoMo · 10K / 20K / tùy chỉnh</span></div>
+<p class="lbl a" style="--d:.7s">Giá BUILD</p>
+<div class="g mi a" style="--d:.8s"><span>BUILD #1</span><span class="tk">–</span><span class="mini">MUA BUILD</span></div>
+<div class="g mi a" style="--d:1s"><span>BUILD #2</span><span class="tk">–</span><span class="mini">MUA BUILD</span></div></div>
+<div class="p2 c" style="--i:12.8s;justify-content:center"><div class="logo">💀</div><h2>Vua Thoát Hiểm</h2><p class="lbl">Giới thiệu</p>
+<div class="g mi"><span>Nhà phát triển</span><span>Kpá Thuyên</span></div><div class="g mi"><span>Phiên bản</span><span>5.0</span></div><div class="g mi"><span>Giao diện</span><span>Liquid Glass</span></div>
+<p class="sm" style="text-align:center">Made with ♥ by Kpá Thuyên · 2026</p></div>
+<div class="g sh" style="--i:2.6s;--o:5.4s"><i class="grab"></i><b class="t">Mua USDT</b><p class="lbl">THANH TOÁN BẰNG</p><div class="pills"><span class="pill hi">ZaloPay</span><span class="pill">MoMo</span></div><p class="lbl">SỐ TIỀN</p><div class="pills"><span class="pill">10.000đ</span><span class="pill">20.000đ</span><span class="pill gd">Tùy chỉnh</span></div><div class="g inp"><small>Nhập số tiền (VND)</small><span class="typ mono" style="--n:6;--d:3.4s;--t:.9s">10.000</span></div><div class="kp" id="kp"></div></div>
+<div class="g sh" style="--i:5.6s;--o:8.8s"><i class="grab"></i><b class="t">Mua USDT</b><span class="toast" style="align-self:flex-start;font-size:2.8cqw;padding:1cqw 3cqw">Thành công · Đã tạo đơn</span><div class="qr"><svg id="qr" viewBox="0 0 25 25"></svg></div><div class="kv"><span>Đơn đang chờ thanh toán</span><b>ZaloPay</b></div><div class="kv"><span>Số tiền cần thanh toán</span><b>10.000 VND</b></div><div class="kv"><span>Còn lại</span><b class="up">29:59</b></div><div class="kv"><span>Trạng thái</span><b style="color:#ffd23f">Đang chờ thanh toán</b></div></div>
+<div class="g sh" style="--i:9s;--o:12.6s"><i class="grab"></i><b class="t">Giá BUILD</b><div class="pills"><span class="pill">BUILD #1</span><span class="pill gd" style="background:rgba(255,210,63,.35);border-color:#ffd23f;color:#ffd23f">BUILD #2</span></div><div class="g" style="padding:2cqw 3cqw;display:flex;justify-content:space-between;align-items:center"><div><small class="sm">Giá hiện tại (USDT)</small><div class="price">0.00025</div></div><b class="up">0.00%</b></div><div class="ob" id="ob"></div><p class="sm">Giá mua đã chọn: 0.0001001 USDT</p><div class="g inp"><small>Số USDT muốn dùng (vd 0.5)</small><span class="mono">0.5</span></div><div class="btn ok">MUA BUILD</div></div></section>
+
+<div class="g tabs" id="tabs"><span>🏠<br>Home</span><span>🛠<br>Tool</span><span>☰<br>Menu</span><span>👤<br>Account</span><span>⚙<br>Setting</span><span>ℹ<br>About</span></div>
+</div></div></div></div>
+<div class="sweep" id="sw"></div>
+<div class="endv" id="endv"><div class="logo">💀</div><h3>Vua Thoát Hiểm</h3><p class="sm">Made by Kpá Thuyên</p><button id="again">↻ Xem lại</button></div>
+<div class="prog" id="prog"></div><div class="sub" id="sub"></div>
+<div class="cover" id="cover"><div class="logo">💀</div><h2>Vua Thoát Hiểm · V5.0</h2><button class="play" id="play">▶ Phát (42 giây)</button><p>Bật loa để nghe giọng đọc tiếng Anh. Phụ đề chạy đồng bộ theo giọng đọc.</p></div>
+</div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const st=$('#st'),cam=$('#cam'),scs=$$('.sc'),tabs=$$('#tabs span'),sub=$('#sub'),endv=$('#endv');
+const B=[0,4,9,14,20,25,42];
+const S=[[.3,"Meet Vua Thoat Hiem, version 5.0."],[4.3,"Activate your key in seconds."],[9.3,"Log in once, and it remembers you."],[14.3,"Your dashboard shows every room live, with a countdown and total pool."],[20.3,"Smart statistics highlight the safest pick, and the AI assistant answers your questions."],[25.3,"Buy credits in a few taps, all in a beautiful Liquid Glass design."],[38.3,"Vua Thoat Hiem. Made by Kpa Thuyen."]];
+let t0=0,raf=0,shot=-1,si=-1,lastTk=0,voice=null;
+const tts='speechSynthesis' in window;
+function pick(){if(!tts)return;const v=speechSynthesis.getVoices().filter(x=>/^en/i.test(x.lang));voice=v.find(x=>/david|daniel|alex|guy|james|fred|male/i.test(x.name)&&!/female/i.test(x.name))||v[0]||null}
+if(tts){pick();speechSynthesis.onvoiceschanged=pick}
+function speak(txt,dur){if(!tts)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='en-US';if(voice)u.voice=voice;u.pitch=.9;u.rate=Math.max(.95,Math.min(1.3,txt.split(' ').length/(dur*2.4)));speechSynthesis.speak(u)}catch(e){}}
+function setShot(i){
+ st.classList.remove('s1','s2','s3','s4','s5','s6');st.classList.add('s'+(i+1));
+ scs.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('pv',k<i)});
+ st.classList.toggle('hasTabs',i>=3);
+ if(i>0){const w=$('#sw');w.classList.remove('go');void w.offsetWidth;w.classList.add('go')}
+}
+function reset(){
+ try{tts&&speechSynthesis.cancel()}catch(e){}
+ cancelAnimationFrame(raf);cam.classList.add('nt');
+ scs.forEach(s=>s.classList.remove('on','pv'));st.classList.remove('hasTabs','s2','s3','s4','s5','s6');st.classList.add('s1');
+ endv.classList.remove('on','fin');sub.classList.remove('show');shot=-1;si=-1;void st.offsetWidth;cam.classList.remove('nt');
+}
+function tick(now){
+ const t=(now-t0)/1000;
+ const i=Math.min(5,B.findIndex((b,k)=>t>=b&&t<B[k+1]));
+ if(i>=0&&i!==shot){shot=i;setShot(i)}
+ $('#prog').style.width=Math.min(100,t/42*100)+'%';
+ if(shot===0){const p=Math.max(0,Math.min(26,Math.round((t-.4)/3.2*26)))+'%',e=$('#pct');if(e.textContent!==p)e.textContent=p}
+ if(shot===3){const f=Math.max(56,60-(t-14)*.8);$('#cd').textContent=Math.ceil(f);$('#ring').style.setProperty('--ang',(f/60*360).toFixed(1)+'deg')}
+ if(shot===5&&now-lastTk>260){lastTk=now;$$('.bk').forEach((e,n)=>{e.textContent=(n%2?'0.000'+(100+Math.floor(Math.random()*20)):'0.0000'+(950+Math.floor(Math.random()*40)))+' · '+(Math.random()*90+5).toFixed(1)+'M'});$$('.tk').forEach(e=>{const up=Math.random()>.5;e.textContent=(up?'▲ ':'▼ ')+(24000+Math.floor(Math.random()*900)).toLocaleString('vi-VN');e.className='tk '+(up?'up':'dn')})}
+ const a=shot<3?0:shot===3?0:shot===4?1:(t<37.8?2:5);
+ tabs.forEach((x,k)=>x.classList.toggle('act',shot>=3&&k===(shot===3?0:shot===4?1:a)));
+ let k=-1;S.forEach((s,n)=>{if(t>=s[0])k=n});
+ if(k!==si){si=k;if(k>=0){const end=S[k+1]?S[k+1][0]:42;sub.textContent=S[k][1];sub.classList.add('show');speak(S[k][1],end-S[k][0]-.3)}}
+ if(t>=40)endv.classList.add('on');
+ if(t>=42.4){endv.classList.add('fin');sub.classList.remove('show');return}
+ raf=requestAnimationFrame(tick);
+}
+function start(){reset();$('#cover').classList.add('off');t0=performance.now();raf=requestAnimationFrame(tick)}
+(function(){const kp=$('#kp');'123456789,0⌫'.split('').forEach(c=>{const s=document.createElement('span');s.textContent=c;kp.appendChild(s)});
+let r=7;const rnd=()=>(r=(r*9301+49297)%233280)/233280;let p='';
+for(let y=0;y<25;y++)for(let x=0;x<25;x++){const f=(x<8&&y<8)||(x>16&&y<8)||(x<8&&y>16);let on;if(f){const a=x<8?x:x-17,b=y<8?y:y-17;on=a<7&&b<7&&(a==0||a==6||b==0||b==6||(a>1&&a<5&&b>1&&b<5))}else on=rnd()>.5;if(on)p+='<rect x="'+x+'" y="'+y+'" width="1" height="1"/>'}
+$('#qr').innerHTML=p;let h='';for(let i=0;i<6;i++)h+='<div class="obr"><span class="bk">0.0000970 · 97.1M</span><span class="bk">0.0001010 · 21.3M</span></div>';$('#ob').innerHTML=h})();
+$('#play').onclick=start;$('#again').onclick=start;
+</script>
+</body>
+</html>
